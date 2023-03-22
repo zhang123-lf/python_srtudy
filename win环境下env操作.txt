@@ -1,0 +1,6 @@
+1、使用命令： virtualenv virtualenv        创建以一个独立的环境
+2、进入venv\Scripts 输入命令： activate.bat     激活环境
+3、现在里面已经是一个独立的环境可以输入python，运行一些任务
+4、进入venv\Scripts 输入命令： deactivate.bat     回到之前的环境
+5、不再使用该venv，直接删除该venv所在文件即可，但是需要确保他没在激活状态
+*****上述操作最好在命令行窗口操作**********************************
