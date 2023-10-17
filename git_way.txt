@@ -1,0 +1,119 @@
+git的用户名:zhang123
+git的email:zlf991112@163.com
+
+git init:将目前的目录变成git可以管理的仓库
+git add file.txt（提交文件） ：将要提交的修改提交到暂存区  
+ git commit -m "ok?"（保存快照） ：将暂存区的文件的修改提交的分支
+更改文件后：git status(查看工作区状态)	git diff(查看修改的内容)
+git log （--pretty=oneline） (查看保存的版本)
+当 git log 后出现”：“，无法操作时，按”q"可退出此模式
+git reset --hard HEAD^(返回前一个版本)
+git reset --hard id(id一般时7位，返回某个版本)
+git reset HEAD file.txt:把暂存区的修改退回到工作区，使暂存区干净
+git checkout -- file.txt:放弃工作区的修改，让文件回复到最近的一次 git add 或者git commit 的状态
+git rm file.txt 并且git commit -m "":从文件库中删除该文件
+
+
+添加远程库的方法：
+	输入“git remote add origin git@github.com:zhang123-lf/learngit.git”连接远程仓库
+	输入“git push -u origin master”:第一次将本地的修改提交到GitHub
+	这样操作成功的前提是 本地仓库已经提交了东西，不然本地仓库是空的就会报错“error: src refspec master does not match any”
+	之后上传只需要输入“git push origin master”
+					//以下是github官网给的方法，要是按照官网的就按下面的做：
+					1.按照github上给的方法（可以直接复制他们的命令代码）：
+					git remote add origin https://github.com/zhang123-lf/learngit.git
+					上面也可以换成git remote add origin git@github.com:zhang123-lf/learngit.git
+					git branch -M main：这个是修改分支名字，后面可以改回来
+					git push -u origin main:第一次将本地的修改提交到GitHub
+					之后提交修改只需要输入	git push origin master
+					//这里的mian和教程上的master都只是分支的名字可以更改
+					2.去GitHub上将main分支名字改成master；在gitbash上输入git branch -M master将本地分支名字改回master
+					这样就和廖雪峰上的教程吻合了
+3.克隆仓库：git clone https://github.com/zhang123-lf/uart-example.git(最好是用种方法来克隆，使用ssh来克隆可能会报错)
+
+git创建和合并分支：
+		git checkout -b dev	(这里也可以使用git switch -c dev/创建dev分支，将HEAD切换到dev分支)
+			相当于”git branch dev	git checkout dev“加上-b参数表示创建并切换
+		git branch	(查看当前分支)	创建切换好分支后可以在此分支提价修改
+		git checkout(这里的checkout可以换成switch）master	(切换回master分支)
+		git merge dev	(将dev的工作成果合并到master分支上)
+		git branch -d dev		(删除dev分支)
+
+解决冲突：
+		当创建了新的分支，并提交了修改后，返回master分支。又在master分支进行了修改并提交，
+		此时，合并分支会发生冲突。输入“git status”打开进行修改的文件，可以知道两个分支的
+		修改，将文件修改并保存提交，如此解决冲突，完成了合并。可以使用git log --graph --pretty=oneline --abbrev-commit
+		查看分支历史。之后删除新分支就行了
+
+分支管理策略：
+		使用“git merge”（fast forward）合并就看不出来曾经做过合并。而加上--no-ff参数
+		就可以做普通模式合并（git merge --no-ff -m "name" dev），合并后有历史，能看出
+		来做过合并。master应该是非常稳定的，仅用来发布新产品，平时在dev上工作
+
+bug分支（只用于在本地修复bug,没必要推送远程）：
+		git stash	(将工作现场储藏起来，此时工作区是干净的)
+		git stash list	  (查看藏起来的工作区)
+		git stash apply 或者git stash apply stash@{0}	(恢复stash内容，后者恢复指定的stash)
+		这个恢复stash后，不删除stash内容，需要git stash drop来删除
+		git stash pop	（恢复的同时，把stash内容也删除了）
+		git cherry-pick commit's id   (复制修改)
+
+feature 分支(看情况推送远程)：
+		开发一个新的feature，最好新建一个分支，丢弃一个没有合并的分支，可以通过  git switch -D <name>强制删除
+		
+多人协作：
+		git remote -v    显示远程库更加详细的信息
+		git push origin dev   推送分支
+		若是自己提交的修改与其他人的冲突，使用	git pull	将其他人的修改抓取下来；
+		git pull失败，是因为没有指定本地的dev与远程大的origin/dev的链接，则输入	git branch --set-upstream-to=origin/dev dev
+		
+		多人协作的工作模式通常是这样：
+
+		首先，可以试图用git push origin <branch-name>推送自己的修改；
+
+		如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+
+		如果合并有冲突，则解决冲突，并在本地提交；
+
+		没有冲突或者解决掉冲突后，再用git push origin <branch-name>推送就能成功！
+
+		如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>。
+
+		这就是多人协作的工作模式，一旦熟悉了，就非常简单。
+
+git rebase:将提交历史变直线，没看懂
+
+
+
+
+
+
+
+
+
+fatal: not a git repository (or any of the parent directories): .git		解决：git init
+
+
+
+
+
+
+
+
+
+Lunix基础操作指令：
+pwd：显示当前所在路径
+ls：查看当前路径下的文件目录
+ls -ah:查看隐藏文件
+mkdir：创建文件夹
+vi：创建并进入子文件
+i：插入模式
+esc：退出插入模式
+:%s/a/b/g：替换（将a替换为b）
+:wq：保存并退出
+cd：进入文件夹
+cd ..：退出上一步
+tar cvf+a(文件名)+.tar(后缀)+A(压缩对象)：压缩文件
+tar xvf+a(需要解压的文件)：解压文件
+rm：删除子文件或压缩包
+rm -r：删除文件夹

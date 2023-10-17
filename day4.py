@@ -113,6 +113,6 @@ def fi1(a,b,c=0,*,d,**kw):
     print(a,b,c,d,kw)
 
 fi(1,2,*nums,city=10)
-fi1(1,2,d=3,s=12,**extra)
+fi1(1,2,d=3,s=12,kw = extra)
 
 #任何函数都可以通过类似的functon(*arg,**extra)

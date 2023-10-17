@@ -116,3 +116,4 @@ print(a)
 a='abcd'
 b=a.replace('c','cccccc')       #替换，其实不是，只是换了指向对象
 print(b,a)
+
